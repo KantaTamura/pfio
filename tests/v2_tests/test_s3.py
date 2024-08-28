@@ -424,6 +424,7 @@ def test_s3_rw_profiling(s3_fixture):
 
         assert "pfio.v2.S3:open" in keys
         assert "pfio.v2.S3:write" in keys
+        assert "pfio.boto3:put_object" in keys
         assert "pfio.v2.S3:exit-context" in keys
 
     with from_url('s3://test-bucket/base', trace=True,
@@ -439,6 +440,7 @@ def test_s3_rw_profiling(s3_fixture):
 
         assert "pfio.v2.S3:open" in keys
         assert "pfio.v2.S3:read" in keys
+        assert "pfio.boto3:get_object" in keys
         assert "pfio.v2.S3:exit-context" in keys
 
     with from_url('s3://test-bucket/base', trace=True,
