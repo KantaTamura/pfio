@@ -1,5 +1,25 @@
 try:
-    from pytorch_pfn_extras.profiler import record, record_iterable
+    import torch
+    from pytorch_pfn_extras.profiler import record as ppe_record
+    from pytorch_pfn_extras.profiler import \
+        record_iterable as ppe_record_iterable
+
+    def record(tag, trace, *args):
+        return ppe_record(
+            tag,
+            use_cuda=torch.cuda.is_available(),
+            enable=trace,
+            trace=trace,
+        )
+
+    def record_iterable(tag, iter, trace, *args):
+        return ppe_record_iterable(
+            tag,
+            iter,
+            use_cuda=torch.cuda.is_available(),
+            enable=trace,
+            trace=trace,
+        )
 
 except ImportError:
 
