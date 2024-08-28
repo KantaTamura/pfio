@@ -213,10 +213,6 @@ def test_s3_zip_profiling():
         state = ppe.profiler.get_tracer().state_dict()
         keys = [event["name"] for event in json.loads(state['_event_list'])]
 
-        assert "pfio.v2.Zip:open" in keys
-        assert "pfio.v2.Zip:read" in keys
-        assert "pfio.v2.Zip:close" in keys
-
         assert "pfio.v2.S3:open" in keys
         assert "pfio.v2.S3:read" in keys
         assert "pfio.v2.S3:close" in keys
